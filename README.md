@@ -1,5 +1,7 @@
 # Europa Component Library Twig loader
 
+[![Build Status](https://travis-ci.org/ec-europa/ecl-twig-loader.svg?branch=master)](https://travis-ci.org/ec-europa/ecl-twig-loader)
+
 [Twig](http://twig.sensiolabs.org) loader for [Europa Component Library](https://github.com/ec-europa/europa-component-library),
 it allows to load components by accessing them via a configurable namespace.
  
