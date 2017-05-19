@@ -8,7 +8,7 @@ For example, given:
 ```php
 <?php
 
-use \EcEuropa\Twig\Loader\EuropaComponentLibraryLoader;
+use \EC\Twig\Loader\EuropaComponentLibraryLoader;
 
 $loader = new EuropaComponentLibraryLoader(['ecl', 'ec-europa'], '/path/to/components', '/root');
 $twig = new Twig_Environment($loader);
