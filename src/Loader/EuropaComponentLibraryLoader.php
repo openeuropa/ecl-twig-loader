@@ -19,14 +19,14 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem {
   /**
    * Constructor.
    *
+   * @param array $namespaces
+   *    List of ECL admissible namespaces, without leading '@'.
    * @param array $paths
    *    A path or an array of paths where to look for templates.
    * @param null $root
    *    The root path common to all relative paths (null for getcwd()).
-   * @param array $namespaces
-   *    List of ECL admissible namespaces, without leading '@'.
    */
-  public function __construct($paths = [], $root = NULL, $namespaces = []) {
+  public function __construct($namespaces, $paths = [], $root = NULL) {
     parent::__construct($paths, $root);
     $this->namespaces = $namespaces;
   }

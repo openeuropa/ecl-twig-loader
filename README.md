@@ -10,7 +10,7 @@ For example, given:
 
 use \EcEuropa\Twig\Loader\EuropaComponentLibraryLoader;
 
-$leader = new EuropaComponentLibraryLoader('/path/to/components', '/root', ['ecl', 'ec-europa']);
+$leader = new EuropaComponentLibraryLoader(['ecl', 'ec-europa'], '/path/to/components', '/root');
 $twig = new Twig_Environment($loader);
 ```
 
@@ -25,13 +25,6 @@ Then the following calls will load the `ecl-logos` component:
 
 ```twig
 {% include '@ec-europa/logos' with {
-  'to': 'https://ec.europa.eu',
-  'title': 'European Commission',
-} %}
-```
-
-```twig
-{% include '@ec-europa/ecl-logos' with {
   'to': 'https://ec.europa.eu',
   'title': 'European Commission',
 } %}
