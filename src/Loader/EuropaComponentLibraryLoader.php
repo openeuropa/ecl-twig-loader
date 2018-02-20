@@ -1,11 +1,11 @@
 <?php
 
-namespace EC\Twig\Loader;
+namespace OpenEuropa\Twig\Loader;
 
 /**
  * Class EuropaComponentLibraryLoader.
  *
- * @package EC\Twig\Loader
+ * @package OpenEuropa\Twig\Loader
  */
 class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem {
 

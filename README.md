@@ -10,7 +10,7 @@ For example, given:
 ```php
 <?php
 
-use \EC\Twig\Loader\EuropaComponentLibraryLoader;
+use \OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
 
 $loader = new EuropaComponentLibraryLoader(['ecl', 'ec-europa'], '/path/to/components', '/root');
 $twig = new Twig_Environment($loader);

@@ -12,7 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "EC\\Twig\\": "src/"
+      "OpenEuropa\\Twig\\": "src/"
     }
   }
 }

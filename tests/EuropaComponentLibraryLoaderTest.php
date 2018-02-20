@@ -1,6 +1,6 @@
 <?php
 
-use EC\Twig\Loader\EuropaComponentLibraryLoader;
+use OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
 use PHPUnit\Framework\TestCase;
 
 /**
