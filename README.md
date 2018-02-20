@@ -1,6 +1,6 @@
 # Europa Component Library Twig loader
 
-[![Build Status](https://travis-ci.org/ec-europa/ecl-twig-loader.svg?branch=master)](https://travis-ci.org/ec-europa/ecl-twig-loader)
+[![Build Status](https://travis-ci.org/openeuropa/ecl-twig-loader.svg?branch=master)](https://travis-ci.org/openeuropa/ecl-twig-loader)
 
 [Twig](http://twig.sensiolabs.org) loader for [Europa Component Library](https://github.com/ec-europa/europa-component-library),
 it allows to load components by accessing them via a configurable namespace.
@@ -12,7 +12,7 @@ For example, given:
 
 use \OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
 
-$loader = new EuropaComponentLibraryLoader(['ecl', 'ec-europa'], '/path/to/components', '/root');
+$loader = new EuropaComponentLibraryLoader(['ecl', 'openeuropa'], '/path/to/components', '/root');
 $twig = new Twig_Environment($loader);
 $output = $twig->loadTemplate('@ecl/logos')->render([]);
 ```
@@ -27,7 +27,7 @@ Then the following calls will load the `ecl-logos` component:
 ```
 
 ```twig
-{% include '@ec-europa/ecl-logos' with {
+{% include '@openeuropa/ecl-logos' with {
   'to': 'https://ec.europa.eu',
   'title': 'European Commission',
 } %}

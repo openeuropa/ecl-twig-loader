@@ -1,5 +1,5 @@
 {
-  "name": "ec-europa/ecl-twig-loader",
+  "name": "openeuropa/ecl-twig-loader",
   "description": "Europa Component Library Twig loader.",
   "type": "library",
   "license": "EUPL-1.1",
