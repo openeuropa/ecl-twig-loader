@@ -2,7 +2,7 @@
   "name": "openeuropa/ecl-twig-loader",
   "description": "Europa Component Library Twig loader.",
   "type": "library",
-  "license": "EUPL-1.1",
+  "license": "EUPL-1.2",
   "minimum-stability": "dev",
   "require": {
     "twig/twig": "~1"
