@@ -4,6 +4,7 @@ namespace OpenEuropa\Twig\Loader\Tests;
 
 use OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
 use PHPUnit\Framework\TestCase;
+use Twig\Environment as Twig_Environment;
 
 /**
  * Class EuropaComponentLibraryLoaderTest
