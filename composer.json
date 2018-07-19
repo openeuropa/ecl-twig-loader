@@ -4,6 +4,7 @@
   "type": "library",
   "license": "EUPL-1.2",
   "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "twig/twig": "~1"
   },
