@@ -21,6 +21,7 @@ pipeline:
     group: test
     image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
     commands:
+      - ./vendor/bin/grumphp
       - ./vendor/bin/phpunit
 
 matrix:
