@@ -31,3 +31,22 @@ Then the following calls will load the `ecl-logos` component:
   'title': 'European Commission',
 } %}
 ```
+## Using Docker Compose
+
+The setup procedure can be simplified by using Docker Compose.
+
+Copy docker-compose.yml.dist into docker-compose.yml.
+
+You can make any alterations you need for your local Docker setup. However, the defaults should be enough to set the project up.
+
+Run:
+
+```
+$ docker-compose up -d
+```
+
+Then:
+
+```
+$ docker-compose exec web composer install
+```
