@@ -9,13 +9,27 @@ services:
       - DOCUMENT_ROOT=/test/ecl-twig-loader
 
 pipeline:
-  composer-install:
+  composer-install-lowest:
+    group: prepare
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    volumes:
+      - /cache:/cache
+    commands:
+      - composer update --prefer-lowest
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: lowest
+
+  composer-install-highest:
     group: prepare
     image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
     volumes:
       - /cache:/cache
     commands:
       - composer install
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: highest
 
   grumphp:
     group: test
