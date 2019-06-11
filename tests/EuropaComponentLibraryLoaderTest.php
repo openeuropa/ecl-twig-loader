@@ -40,15 +40,17 @@ class EuropaComponentLibraryLoaderTest extends TestCase
     public function dataProvider()
     {
         return [
-        // Test without prefix.
+            // Test without prefix.
             ['@namespace1/ecl-component1', 'ecl-component1.twig ecl-component2.twig ecl-component3.twig', ''],
             ['@namespace1/ecl-component1', 'ecl-component1.twig ecl-component2.twig ecl-component3.twig', ''],
             ['@namespace2/ecl-component2', 'ecl-component2.twig ecl-component3.twig', ''],
             ['@namespace2/ecl-component3', 'ecl-component3.twig', ''],
             ['@namespace2/ecl-component4/sub-component1', 'sub-component1.twig', ''],
-        // Test with prefix.
+            // Test with prefix.
             ['@namespace1/component5', 'component5.twig', 'ecl-'],
             ['@namespace1/component5/sub-component1', 'sub-component1.twig', 'ecl-'],
+            // Test with relative loading.
+            ['@namespace1/component6', 'component6.twig component5.twig', 'ecl-'],
         ];
     }
 }

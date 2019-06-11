@@ -73,6 +73,13 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
             }
         }
 
+        // ECL 2.0 Twig templates use relative include method.
+        // The following snippet allows to load templates that are references
+        // within other templates, given that they use the same prefix.
+        if (strstr($name, '..'.DIRECTORY_SEPARATOR.$this->prefix)) {
+            $name = str_replace('..'.DIRECTORY_SEPARATOR, '', $name);
+        }
+
         return parent::findTemplate($name);
     }
 
