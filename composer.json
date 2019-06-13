@@ -21,5 +21,8 @@
     "extra": {
         "composer-exit-on-patch-failure": true,
         "enable-patching": true
+    },
+    "scripts": {
+        "changelog": "docker run --rm -v \"$(pwd):$(pwd)\" -w $(pwd) muccg/github-changelog-generator openeuropa/ecl-twig-loader -t $CHANGELOG_GITHUB_TOKEN --future-release=$CHANGELOG_FUTURE_RELEASE"
     }
 }
