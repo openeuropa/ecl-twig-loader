@@ -4,49 +4,46 @@ workspace:
 
 services:
   web:
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
     environment:
-    - DOCUMENT_ROOT=/test/ecl-twig-loader
+      - DOCUMENT_ROOT=/test/ecl-twig-loader
 
 pipeline:
-  composer-install-lowest:
+  composer-install:
     group: prepare
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
     volumes:
-    - /cache:/cache
+      - /cache:/cache
     commands:
-    - composer update --prefer-lowest --ansi
+      - composer install --ansi --no-suggest --no-progress
+
+  composer-update-lowest:
+    group: post-prepare
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
+    volumes:
+      - /cache:/cache
+    commands:
+      - composer update --prefer-lowest --ansi --no-suggest --no-progress
     when:
       matrix:
         COMPOSER_BOUNDARY: lowest
 
-  composer-install-highest:
-    group: prepare
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
-    volumes:
-    - /cache:/cache
-    commands:
-    - composer install --ansi
-    when:
-      matrix:
-        COMPOSER_BOUNDARY: highest
-
   grumphp:
     group: test
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
     commands:
-    - ./vendor/bin/grumphp run
+      - ./vendor/bin/grumphp run
 
   phpunit:
     group: test
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
     commands:
-    - ./vendor/bin/phpunit
+      - ./vendor/bin/phpunit
 
 matrix:
-  IMAGE_PHP:
-  - fpfis/httpd-php-dev:5.6
-  - fpfis/httpd-php-dev:7.1
+  PHP_VERSION:
+    - 5.6
+    - 7.1
   COMPOSER_BOUNDARY:
-  - lowest
-  - highest
+    - lowest
+    - highest

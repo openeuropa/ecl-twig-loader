@@ -45,7 +45,7 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
      * @param string       $extension
      *    Twig extension.
      */
-    public function __construct($namespaces, $paths = [], $root = null, $prefix = 'ecl-', $extension = '.twig')
+    public function __construct($namespaces, $paths = [], $root = null, $prefix = '', $extension = '.twig')
     {
         parent::__construct($paths, $root);
         $this->namespaces = $namespaces;
@@ -60,8 +60,24 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
     {
         list($namespace, $componentName) = $this->parseName($name);
         if (in_array($namespace, $this->namespaces)) {
-            $normalizedName = $this->normalizeComponentName($componentName);
-            $name = $normalizedName.DIRECTORY_SEPARATOR.$normalizedName.$this->extension;
+            if (strpos($componentName, '/') === false) {
+                // If no sub-component is specified we assume that the Twig template
+                // has the same name of the component.
+                $prefixedName = $this->normalizeComponentName($componentName);
+                $name = $prefixedName.DIRECTORY_SEPARATOR.$componentName.$this->extension;
+            } else {
+                // If we have a sub-component, then we use it as template name.
+                list($componentName, $templateName) = explode('/', $componentName);
+                $prefixedName = $this->normalizeComponentName($componentName);
+                $name = $prefixedName.DIRECTORY_SEPARATOR.$templateName.$this->extension;
+            }
+        }
+
+        // ECL 2.0 Twig templates use relative include method.
+        // The following snippet allows to load templates that are references
+        // within other templates, given that they use the same prefix.
+        if (strstr($name, '..'.DIRECTORY_SEPARATOR.$this->prefix)) {
+            $name = str_replace('..'.DIRECTORY_SEPARATOR, '', $name);
         }
 
         return parent::findTemplate($name);

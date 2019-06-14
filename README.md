@@ -12,15 +12,17 @@ For example, given:
 
 use \OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
 
-$loader = new EuropaComponentLibraryLoader(['ecl', 'openeuropa'], '/path/to/components', '/root');
+$loader = new EuropaComponentLibraryLoader(
+    ['ecl', 'openeuropa'], 
+    '/path/to/components', 
+    '/root');
 $twig = new Twig_Environment($loader);
-$output = $twig->loadTemplate('@ecl/logos')->render([]);
 ```
 
-Then the following calls will load the `ecl-logos` component:
+The following calls will load the `ecl-logos` component:
 
 ```twig
-{% include '@ecl/logos' with {
+{% include '@ecl/ecl-logos' with {
   'to': 'https://ec.europa.eu',
   'title': 'European Commission',
 } %}
@@ -32,6 +34,44 @@ Then the following calls will load the `ecl-logos` component:
   'title': 'European Commission',
 } %}
 ```
+
+You can specify a custom ECL prefix too. The prefix will be applied to the parent directory when loading the template:
+
+```php
+<?php
+
+use \OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
+
+$loader = new EuropaComponentLibraryLoader(
+    ['ecl'], 
+    '/path/to/components', 
+    '/root', 'ec-component', 
+    '.html.twig');
+$twig = new Twig_Environment($loader);
+```
+
+```twig
+{% include '@ecl/foo' %}
+```
+
+This will load:
+
+```
+/path/to/components/ec-component-foo/foo.html.twig
+```
+
+You can also specify sub-components in the following way:
+
+```twig
+{% include '@ecl/foo/bar' %}
+```
+
+This will load:
+
+```
+/path/to/components/ec-component-foo/bar.html.twig
+```
+
 ## Installation using Docker Compose
 
 The setup procedure can be simplified by using Docker Compose.
