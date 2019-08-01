@@ -10,7 +10,7 @@
     },
     "require-dev": {
         "cweagans/composer-patches": "~1.6",
-        "openeuropa/code-review": "dev-OPENEUROPA-2054",
+        "openeuropa/code-review": "~1.0.0-beta4",
         "phpunit/phpunit": "~6.0"
     },
     "autoload": {
