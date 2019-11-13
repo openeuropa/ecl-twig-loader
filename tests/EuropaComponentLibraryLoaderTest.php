@@ -52,6 +52,8 @@ class EuropaComponentLibraryLoaderTest extends TestCase
             ['@namespace1/component5/sub-component1', 'component5 sub-component1', 'ecl-'],
             // Test with prefix and with relative loading.
             ['@namespace1/component6', 'component6 component5', 'ecl-'],
+            // Test when using full name.
+            ['@namespace1/ec-component-full-name/ecl-full-name.html.twig', 'full-name', 'ec-component-'],
         ];
     }
 }

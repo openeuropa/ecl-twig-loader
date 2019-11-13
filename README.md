@@ -25,14 +25,14 @@ If you setup the loader as follows:
 
 use \OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
 
-$loader = new EuropaComponentLibraryLoader(['ecl'], '/components', '/path/to');
+$loader = new EuropaComponentLibraryLoader(['ecl-twig'], '/components', '/path/to');
 $twig = new Twig_Environment($loader);
 ```
 
 Then you can load the link component in the following way:
 
 ```twig
-{% include '@ecl/link' with {
+{% include '@ecl-twig/ec-component-link/ecl-link.html.twig' with {
   link: { 
     type: 'standalone',
     label: 'Standalone link',
@@ -42,10 +42,23 @@ Then you can load the link component in the following way:
 } %}
 ```
 
-You can also load sub-components by specifying appending them after the component name.
+You can also use a shorter form, based on implicit naming conventions:
 
 ```twig
-{% include '@ecl/language-list/language-list-splash' %}
+{% include '@ecl-twig/link' with {
+  link: {
+    type: 'standalone',
+    label: 'Standalone link',
+    path: 'http://google.com',
+    icon_position: 'after'
+  }
+} %}
+```
+
+To load sub-components append them after the component name:
+
+```twig
+{% include '@ecl-twig/language-list/language-list-splash' %}
 ```
 
 ## Installation using Docker Compose
