@@ -41,17 +41,17 @@ class EuropaComponentLibraryLoaderTest extends TestCase
     {
         return [
             // Test without prefix.
-            ['@namespace1/component1', 'component1/component1.twig', ''],
+            ['@namespace1/component1', 'component1', ''],
             // Test without prefix and with inclusions.
-            ['@namespace2/component2', 'component2/component2.twig component1/component1.twig', ''],
-            ['@namespace2/component3', 'component3/component3.twig component2/component2.twig component1/component1.twig', ''],
+            ['@namespace2/component2', 'component2 component1', ''],
+            ['@namespace2/component3', 'component3 component2 component1', ''],
             // Test without prefix and sub component.
-            ['@namespace2/component4/sub-component1', 'component4/sub-component1.twig', ''],
+            ['@namespace2/component4/sub-component1', 'component4 sub-component1', ''],
             // Test with prefix.
-            ['@namespace1/component5', 'ecl-component5/component5.twig', 'ecl-'],
-            ['@namespace1/component5/sub-component1', 'ecl-component5/sub-component1.twig', 'ecl-'],
+            ['@namespace1/component5', 'component5', 'ecl-'],
+            ['@namespace1/component5/sub-component1', 'component5 sub-component1', 'ecl-'],
             // Test with prefix and with relative loading.
-            ['@namespace1/component6', 'ecl-component6/component6.twig ecl-component5/component5.twig', 'ecl-'],
+            ['@namespace1/component6', 'component6 component5', 'ecl-'],
         ];
     }
 }
