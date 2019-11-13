@@ -2,74 +2,63 @@
 [![Build Status](https://drone.fpfis.eu/api/badges/openeuropa/ecl-twig-loader/status.svg)](https://drone.fpfis.eu/openeuropa/ecl-twig-loader/)
 [![Packagist](https://img.shields.io/packagist/v/openeuropa/ecl-twig-loader.svg)](https://packagist.org/packages/openeuropa/ecl-twig-loader)
 
-[Twig](http://twig.sensiolabs.org) loader for [Europa Component Library](https://github.com/ec-europa/europa-component-library),
+[Twig](http://twig.sensiolabs.org) loader for [Europa Component Library Twig implementation (ECL Twig)](https://github.com/ec-europa/ecl-twig),
 it allows to load components by accessing them via a configurable namespace.
  
-For example, given:
+For example, given you have the following ECL twig components:
+
+```
+/path/to/components/
+├── ec-component-link
+│   └── ecl-link.html.twig
+└── ec-component-language-list
+    ├── ecl-language-list.html.twig
+    ├── ecl-language-list-item.html.twig
+    ├── ecl-language-list-overlay.html.twig
+    └── ecl-language-list-splash.html.twig
+```
+
+If you setup the loader as follows:
 
 ```php
 <?php
 
 use \OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
 
-$loader = new EuropaComponentLibraryLoader(
-    ['ecl', 'openeuropa'], 
-    '/path/to/components', 
-    '/root');
+$loader = new EuropaComponentLibraryLoader(['ecl-twig'], '/components', '/path/to');
 $twig = new Twig_Environment($loader);
 ```
 
-The following calls will load the `ecl-logos` component:
+Then you can load the link component in the following way:
 
 ```twig
-{% include '@ecl/ecl-logos' with {
-  'to': 'https://ec.europa.eu',
-  'title': 'European Commission',
+{% include '@ecl-twig/ec-component-link/ecl-link.html.twig' with {
+  link: { 
+    type: 'standalone',
+    label: 'Standalone link',
+    path: 'http://google.com',
+    icon_position: 'after'
+  }
 } %}
 ```
 
+You can also use a shorter form, based on implicit naming conventions:
+
 ```twig
-{% include '@openeuropa/ecl-logos' with {
-  'to': 'https://ec.europa.eu',
-  'title': 'European Commission',
+{% include '@ecl-twig/link' with {
+  link: {
+    type: 'standalone',
+    label: 'Standalone link',
+    path: 'http://google.com',
+    icon_position: 'after'
+  }
 } %}
 ```
 
-You can specify a custom ECL prefix too. The prefix will be applied to the parent directory when loading the template:
-
-```php
-<?php
-
-use \OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
-
-$loader = new EuropaComponentLibraryLoader(
-    ['ecl'], 
-    '/path/to/components', 
-    '/root', 'ec-component', 
-    '.html.twig');
-$twig = new Twig_Environment($loader);
-```
+To load sub-components append them after the component name:
 
 ```twig
-{% include '@ecl/foo' %}
-```
-
-This will load:
-
-```
-/path/to/components/ec-component-foo/foo.html.twig
-```
-
-You can also specify sub-components in the following way:
-
-```twig
-{% include '@ecl/foo/bar' %}
-```
-
-This will load:
-
-```
-/path/to/components/ec-component-foo/bar.html.twig
+{% include '@ecl-twig/language-list/language-list-splash' %}
 ```
 
 ## Installation using Docker Compose

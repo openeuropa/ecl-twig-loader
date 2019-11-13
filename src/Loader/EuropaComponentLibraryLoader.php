@@ -25,6 +25,13 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
     protected $prefix;
 
     /**
+     * ECL template name prefix.
+     *
+     * @var array
+     */
+    protected $templatePrefix;
+
+    /**
      * Twig extension.
      *
      * @var array
@@ -41,16 +48,19 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
      * @param null|string  $root
      *    The root path common to all relative paths (null for getcwd())
      * @param string       $prefix
-     *    Component name prefix.
+     *    Component name prefix, defaults to "ec-component-".
+     * @param string       $templatePrefix
+     *    ECL template name prefix, defaults to "ecl-".
      * @param string       $extension
-     *    Twig extension.
+     *    Twig extension, defaults to ".html.twig".
      */
-    public function __construct($namespaces, $paths = [], $root = null, $prefix = '', $extension = '.twig')
+    public function __construct($namespaces, $paths = [], $root = null, $prefix = 'ec-component-', $templatePrefix = 'ecl-', $extension = '.html.twig')
     {
         parent::__construct($paths, $root);
         $this->namespaces = $namespaces;
         $this->prefix = $prefix;
         $this->extension = $extension;
+        $this->templatePrefix = $templatePrefix;
     }
 
     /**
@@ -59,26 +69,29 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
     protected function findTemplate($name)
     {
         list($namespace, $componentName) = $this->parseName($name);
-        if (in_array($namespace, $this->namespaces)) {
-            if (strpos($componentName, '/') === false) {
-                // If no sub-component is specified we assume that the Twig template
-                // has the same name of the component.
-                $prefixedName = $this->normalizeComponentName($componentName);
-                $name = $prefixedName.DIRECTORY_SEPARATOR.$componentName.$this->extension;
-            } else {
-                // If we have a sub-component, then we use it as template name.
-                list($componentName, $templateName) = explode('/', $componentName);
-                $prefixedName = $this->normalizeComponentName($componentName);
-                $name = $prefixedName.DIRECTORY_SEPARATOR.$templateName.$this->extension;
-            }
+
+        // If namespace is not one of ours just move along, nothing to see here.
+        if (!in_array($namespace, $this->namespaces)) {
+            return parent::findTemplate($name);
         }
 
-        // ECL 2.0 Twig templates use relative include method.
-        // The following snippet allows to load templates that are references
-        // within other templates, given that they use the same prefix.
-        if (strstr($name, '..'.DIRECTORY_SEPARATOR.$this->prefix)) {
-            $name = str_replace('..'.DIRECTORY_SEPARATOR, '', $name);
+        // If component uses full name just use it, our job is done.
+        if ($this->isFullName($componentName)) {
+            return parent::findTemplate($componentName);
         }
+
+        // If component uses the short form then expand it into its full name.
+        if (strpos($componentName, '/') === false) {
+            // If no sub-component is specified we assume that the Twig template
+            // has the same name of the component.
+            $prefixedName = $this->normalizeComponentName($componentName);
+            $templateName = $componentName;
+        } else {
+            // If we have a sub-component, then we use it as template name.
+            list($componentName, $templateName) = explode('/', $componentName);
+            $prefixedName = $this->normalizeComponentName($componentName);
+        }
+        $name = $prefixedName.DIRECTORY_SEPARATOR.$this->templatePrefix.$templateName.$this->extension;
 
         return parent::findTemplate($name);
     }
@@ -99,5 +112,20 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
         }
 
         return $name;
+    }
+
+    /**
+     * Check whereas the component name is expressed in its full form.
+     * For example: "ec-component-blockquote/ecl-blockquote.html.twig".
+     *
+     * @param string $componentName
+     *   Component name.
+     *
+     * @return bool
+     *   Whereas the component name is expressed in its full form.
+     */
+    protected function isFullName($componentName)
+    {
+        return (bool) preg_match("/^{$this->prefix}(.*)\/{$this->templatePrefix}(.*){$this->extension}$/", $componentName);
     }
 }
