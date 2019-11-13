@@ -115,14 +115,14 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
     }
 
     /**
-     * Check whereas te component name is expressed in its full form.
+     * Check whereas the component name is expressed in its full form.
      * For example: "ec-component-blockquote/ecl-blockquote.html.twig".
      *
      * @param string $componentName
      *   Component name.
      *
      * @return bool
-     *   Whereas te component name is expressed in its full form.
+     *   Whereas the component name is expressed in its full form.
      */
     protected function isFullName($componentName)
     {
