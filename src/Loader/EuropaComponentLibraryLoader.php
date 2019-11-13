@@ -48,13 +48,13 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
      * @param null|string  $root
      *    The root path common to all relative paths (null for getcwd())
      * @param string       $prefix
-     *    Component name prefix.
+     *    Component name prefix, defaults to "ec-component-".
      * @param string       $templatePrefix
      *    ECL template name prefix, defaults to "ecl-".
      * @param string       $extension
      *    Twig extension, defaults to ".html.twig".
      */
-    public function __construct($namespaces, $paths = [], $root = null, $prefix = '', $templatePrefix = 'ecl-', $extension = '.html.twig')
+    public function __construct($namespaces, $paths = [], $root = null, $prefix = 'ec-component-', $templatePrefix = 'ecl-', $extension = '.html.twig')
     {
         parent::__construct($paths, $root);
         $this->namespaces = $namespaces;
