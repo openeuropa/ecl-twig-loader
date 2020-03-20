@@ -4,14 +4,14 @@ workspace:
 
 services:
   web:
-    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION}
     environment:
       - DOCUMENT_ROOT=/test/ecl-twig-loader
 
 pipeline:
   composer-install:
     group: prepare
-    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION}
     volumes:
       - /cache:/cache
     commands:
@@ -19,7 +19,7 @@ pipeline:
 
   composer-update-lowest:
     group: post-prepare
-    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION}
     volumes:
       - /cache:/cache
     commands:
@@ -30,20 +30,20 @@ pipeline:
 
   grumphp:
     group: test
-    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION}
     commands:
       - ./vendor/bin/grumphp run
 
   phpunit:
     group: test
-    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION}
     commands:
       - ./vendor/bin/phpunit
 
 matrix:
   PHP_VERSION:
-    - 5.6
-    - 7.1
+    - 7.2
+    - 7.3
   COMPOSER_BOUNDARY:
     - lowest
     - highest
