@@ -1,5 +1,14 @@
 # Change Log
 
+## [2.1.0](https://github.com/openeuropa/ecl-twig-loader/tree/2.1.0) (2021-01-22)
+[Full Changelog](https://github.com/openeuropa/ecl-twig-loader/compare/2.0.0...2.1.0)
+
+**Merged pull requests:**
+
+- EWPP-516: Update docker php image. [\#24](https://github.com/openeuropa/ecl-twig-loader/pull/24) ([22Alexandra](https://github.com/22Alexandra))
+- OPENEUROPA-2943: Update composer.json. [\#22](https://github.com/openeuropa/ecl-twig-loader/pull/22) ([sergepavle](https://github.com/sergepavle))
+- OPENEUROPA-2943: Upgrade to PHP 7.3. [\#21](https://github.com/openeuropa/ecl-twig-loader/pull/21) ([sergepavle](https://github.com/sergepavle))
+
 ## [2.0.0](https://github.com/openeuropa/ecl-twig-loader/tree/2.0.0) (2019-11-13)
 [Full Changelog](https://github.com/openeuropa/ecl-twig-loader/compare/1.0.0...2.0.0)
 
