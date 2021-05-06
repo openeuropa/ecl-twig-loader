@@ -54,7 +54,7 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
      * @param string       $extension
      *    Twig extension, defaults to ".html.twig".
      */
-    public function __construct($namespaces, $paths = [], $root = null, $prefix = 'ec-component-', $templatePrefix = 'ecl-', $extension = '.html.twig')
+    public function __construct($namespaces, $paths = [], $root = null, $prefix = 'twig-component-', $templatePrefix = '', $extension = '.html.twig')
     {
         parent::__construct($paths, $root);
         $this->namespaces = $namespaces;
@@ -91,8 +91,13 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
             list($componentName, $templateName) = explode('/', $componentName);
             $prefixedName = $this->normalizeComponentName($componentName);
         }
-        $name = $prefixedName.DIRECTORY_SEPARATOR.$this->templatePrefix.$templateName.$this->extension;
+        $name = $prefixedName.DIRECTORY_SEPARATOR.$this->templatePrefix.$templateName;
 
+        // The component name could already include the file extension so check
+        // and add if it is not.
+        if (substr_compare($name, $this->extension, -strlen($this->extension)) !== 0) {
+            $name = $name.$this->extension;
+        }
         return parent::findTemplate($name);
     }
 
