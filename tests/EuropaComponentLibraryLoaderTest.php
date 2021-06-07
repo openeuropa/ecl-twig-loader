@@ -17,14 +17,16 @@ class EuropaComponentLibraryLoaderTest extends TestCase
      *
      * @param string $name
      * @param string $expected
+     * @param string $prefix
+     * @param string $templatePrefix
      *
      * @dataProvider dataProvider
      */
-    public function testLoader($name, $expected, $prefix)
+    public function testLoader($name, $expected, $prefix, $templatePrefix)
     {
         $namespaces = ['namespace1', 'namespace2'];
         $paths = ['tests/fixtures/components'];
-        $loader = new EuropaComponentLibraryLoader($namespaces, $paths, null, $prefix);
+        $loader = new EuropaComponentLibraryLoader($namespaces, $paths, null, $prefix, $templatePrefix);
         $twig = new Twig_Environment($loader);
         $actual = $twig->loadTemplate($name)->render([]);
         $actual = str_replace("\n", ' ', trim($actual));
@@ -41,19 +43,21 @@ class EuropaComponentLibraryLoaderTest extends TestCase
     {
         return [
             // Test without prefix.
-            ['@namespace1/component1', 'component1', ''],
+            ['@namespace1/component1', 'component1', '', ''],
             // Test without prefix and with inclusions.
-            ['@namespace2/component2', 'component2 component1', ''],
-            ['@namespace2/component3', 'component3 component2 component1', ''],
+            ['@namespace2/component2', 'component2 component1', '', ''],
+            ['@namespace2/component3', 'component3 component2 component1', '', ''],
             // Test without prefix and sub component.
-            ['@namespace2/component4/sub-component1', 'component4 sub-component1', ''],
-            // Test with prefix.
-            ['@namespace1/component5', 'component5', 'ecl-'],
-            ['@namespace1/component5/sub-component1', 'component5 sub-component1', 'ecl-'],
+            ['@namespace2/component4/sub-component1', 'component4 sub-component1', '', ''],
+            // Test with component prefix.
+            ['@namespace1/component5', 'component5', 'ecl-', ''],
+            ['@namespace1/component5/sub-component1', 'component5 sub-component1', 'ecl-', ''],
             // Test with prefix and with relative loading.
-            ['@namespace1/component6', 'component6 component5', 'ecl-'],
+            ['@namespace1/component6', 'component6 component5', 'ecl-', ''],
             // Test when using full name.
-            ['@namespace1/ec-component-full-name/ecl-full-name.html.twig', 'full-name', 'ec-component-'],
+            ['@namespace1/ec-component-full-name/ecl-full-name.html.twig', 'full-name', 'ec-component-', ''],
+            // Test when using template prefix.
+            ['@namespace1/component7', 'component7', '', 'ecl-'],
         ];
     }
 }
