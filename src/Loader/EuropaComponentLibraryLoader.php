@@ -45,13 +45,13 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
      *    List of ECL admissible namespaces, without leading '@'.
      * @param array|string $paths
      *    A path or an array of paths where to look for templates.
-     * @param null|string  $root
+     * @param string|null $root
      *    The root path common to all relative paths (null for getcwd())
-     * @param string       $prefix
-     *    Component name prefix, defaults to "ec-component-".
-     * @param string       $templatePrefix
-     *    ECL template name prefix, defaults to "ecl-".
-     * @param string       $extension
+     * @param string $prefix
+     *    Component name prefix, defaults to "twig-component-".
+     * @param string $templatePrefix
+     *    ECL template name prefix, defaults to no prefix.
+     * @param string $extension
      *    Twig extension, defaults to ".html.twig".
      */
     public function __construct($namespaces, $paths = [], $root = null, $prefix = 'twig-component-', $templatePrefix = '', $extension = '.html.twig')
