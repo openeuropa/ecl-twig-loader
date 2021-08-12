@@ -2,42 +2,39 @@
 [![Build Status](https://drone.fpfis.eu/api/badges/openeuropa/ecl-twig-loader/status.svg)](https://drone.fpfis.eu/openeuropa/ecl-twig-loader/)
 [![Packagist](https://img.shields.io/packagist/v/openeuropa/ecl-twig-loader.svg)](https://packagist.org/packages/openeuropa/ecl-twig-loader)
 
-[Twig](http://twig.sensiolabs.org) loader for [Europa Component Library Twig implementation (ECL Twig)](https://github.com/ec-europa/ecl-twig),
+[Twig](http://twig.sensiolabs.org) loader for [Europa Component Library Version 3](https://github.com/ec-europa/europa-component-library),
 it allows to load components by accessing them via a configurable namespace.
- 
-For example, given you have the following ECL twig components:
+
+For example, given you have the following ECL components:
 
 ```
 /path/to/components/
-├── ec-component-link
+├── twig-component-link
 │   └── ecl-link.html.twig
-└── ec-component-language-list
-    ├── ecl-language-list.html.twig
-    ├── ecl-language-list-item.html.twig
-    ├── ecl-language-list-overlay.html.twig
-    └── ecl-language-list-splash.html.twig
+└── twig-component-language-list
+    ├── ecl-language-list.html.twig
+    ├── ecl-language-list-grid.html.twig
+    └── ecl-language-list-item.html.twig
 ```
 
-If you setup the loader as follows:
+If you set up the loader as follows:
 
 ```php
 <?php
 
 use \OpenEuropa\Twig\Loader\EuropaComponentLibraryLoader;
 
-$loader = new EuropaComponentLibraryLoader(['ecl-twig'], '/components', '/path/to');
+$loader = new EuropaComponentLibraryLoader(['ecl'], '/components', '/path/to');
 $twig = new Twig_Environment($loader);
 ```
 
 Then you can load the link component in the following way:
 
 ```twig
-{% include '@ecl-twig/ec-component-link/ecl-link.html.twig' with {
-  link: { 
+{% include '@ecl/link/link.html.twig' with {
+  link: {
     type: 'standalone',
-    label: 'Standalone link',
-    path: 'http://google.com',
-    icon_position: 'after'
+    label: 'Standalone link'
   }
 } %}
 ```
@@ -45,12 +42,10 @@ Then you can load the link component in the following way:
 You can also use a shorter form, based on implicit naming conventions:
 
 ```twig
-{% include '@ecl-twig/link' with {
+{% include '@ecl/link' with {
   link: {
     type: 'standalone',
-    label: 'Standalone link',
-    path: 'http://google.com',
-    icon_position: 'after'
+    label: 'Standalone link'
   }
 } %}
 ```
@@ -58,7 +53,7 @@ You can also use a shorter form, based on implicit naming conventions:
 To load sub-components append them after the component name:
 
 ```twig
-{% include '@ecl-twig/language-list/language-list-splash' %}
+{% include '@ecl/language-list/language-list-item' %}
 ```
 
 ## Installation using Docker Compose

@@ -1,5 +1,12 @@
 # Change Log
 
+## [3.0.0](https://github.com/openeuropa/ecl-twig-loader/tree/) (2021-08-12)
+[Full Changelog](https://github.com/openeuropa/ecl-twig-loader/compare/2.1.0...3.0.0)
+
+**Merged pull requests:**
+
+- EWPP-1146: Update test coverage for template prefixes. [\#28](https://github.com/openeuropa/ecl-twig-loader/pull/28) ([22Alexandra](https://github.com/22Alexandra))
+
 ## [2.1.0](https://github.com/openeuropa/ecl-twig-loader/tree/2.1.0) (2021-01-22)
 [Full Changelog](https://github.com/openeuropa/ecl-twig-loader/compare/2.0.0...2.1.0)
 
