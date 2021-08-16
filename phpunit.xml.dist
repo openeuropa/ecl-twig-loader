@@ -8,9 +8,9 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="false">
+         cacheResult="false">
   <testsuites>
-    <testsuite>
+    <testsuite name="ECL Twig Loader">
       <directory>./tests/</directory>
     </testsuite>
   </testsuites>
