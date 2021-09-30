@@ -1,6 +1,13 @@
 # Change Log
 
-## [3.0.0](https://github.com/openeuropa/ecl-twig-loader/tree/) (2021-08-12)
+## [3.1.0](https://github.com/openeuropa/ecl-twig-loader/tree/3.1.0) (2021-09-30)
+[Full Changelog](https://github.com/openeuropa/ecl-twig-loader/compare/3.0.0...3.1.0)
+
+**Merged pull requests:**
+
+- OEL-337: Drupal 9 update. [\#31](https://github.com/openeuropa/ecl-twig-loader/pull/31) ([escuriola](https://github.com/escuriola))
+
+## [3.0.0](https://github.com/openeuropa/ecl-twig-loader/tree/3.0.0) (2021-08-12)
 [Full Changelog](https://github.com/openeuropa/ecl-twig-loader/compare/2.1.0...3.0.0)
 
 **Merged pull requests:**
