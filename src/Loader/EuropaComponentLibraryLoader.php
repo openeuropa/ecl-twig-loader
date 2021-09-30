@@ -2,12 +2,15 @@
 
 namespace OpenEuropa\Twig\Loader;
 
+use Twig\Loader\FilesystemLoader;
+use Twig\Error\LoaderError;
+
 /**
  * Class EuropaComponentLibraryLoader.
  *
  * @package OpenEuropa\Twig\Loader
  */
-class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
+class EuropaComponentLibraryLoader extends FilesystemLoader
 {
 
     /**
@@ -66,7 +69,7 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
     /**
      * {@inheritdoc}
      */
-    protected function findTemplate($name)
+    protected function findTemplate($name, $throw = true)
     {
         list($namespace, $componentName) = $this->parseName($name);
 
@@ -132,5 +135,24 @@ class EuropaComponentLibraryLoader extends \Twig_Loader_Filesystem
     protected function isFullName($componentName)
     {
         return (bool) preg_match("/^{$this->prefix}(.*)\/{$this->templatePrefix}(.*){$this->extension}$/", $componentName);
+    }
+
+    /**
+     * Copy of private function Twig\Loader\FilesystemLoader::parseName().
+     */
+    protected function parseName($name, $default = self::MAIN_NAMESPACE): array
+    {
+        if (isset($name[0]) && '@' === $name[0]) {
+            if (false === $pos = strpos($name, '/')) {
+                throw new LoaderError(sprintf('Malformed namespaced template name "%s" (expecting "@namespace/template_name").', $name));
+            }
+
+            $namespace = substr($name, 1, $pos - 1);
+            $shortname = substr($name, $pos + 1);
+
+            return [$namespace, $shortname];
+        }
+
+        return [$default, $name];
     }
 }
