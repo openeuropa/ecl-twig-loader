@@ -28,7 +28,7 @@ class EuropaComponentLibraryLoaderTest extends TestCase
         $paths = ['tests/fixtures/components'];
         $loader = new EuropaComponentLibraryLoader($namespaces, $paths, null, $prefix, $templatePrefix);
         $twig = new Twig_Environment($loader);
-        $actual = $twig->loadTemplate($name)->render([]);
+        $actual = $twig->loadTemplate($twig->getTemplateClass($name), $name)->render([]);
         $actual = str_replace("\n", ' ', trim($actual));
         $this->assertEquals($expected, $actual);
     }
