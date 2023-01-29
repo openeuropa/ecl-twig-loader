@@ -30,8 +30,7 @@ pipeline:
       matrix:
         include:
           COMPOSER_BOUNDARY: highest
-        exclude:
-          PHP_VERSION: 7.4
+          PHP_VERSION: [8.0, 8.1]
 
   composer-install-lowest:
     group: post-prepare
@@ -44,8 +43,7 @@ pipeline:
       matrix:
         include:
           COMPOSER_BOUNDARY: lowest
-        exclude:
-          PHP_VERSION: [8.0, 8.1]
+          PHP_VERSION: 7.4
 
   grumphp:
     group: test
