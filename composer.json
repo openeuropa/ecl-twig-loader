@@ -6,7 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.0",
+        "php": ">=7.4",
         "twig/twig": "^1.38 || ^2.7 || ^3.4"
     },
     "require-dev": {
@@ -32,6 +32,6 @@
     "extra": {
         "_readme": [
             "Explicit minimum version of phpunit/phpunit 8 to due to https://stackoverflow.com/a/70974793"
-        ]    
+        ]
     }
 }
