@@ -20,7 +20,7 @@ services:
 
 pipeline:
   composer-install:
-    group: prepare
+    group: post-prepare
     image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     volumes:
       - /cache:/cache
@@ -28,7 +28,7 @@ pipeline:
       - composer install --ansi --no-suggest --no-progress
 
   composer-install-lowest:
-    group: prepare
+    group: post-prepare
     image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     volumes:
       - /cache:/cache
