@@ -6,12 +6,12 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.4",
-        "twig/twig": "^1.38 || ^2.7 || ^3.4"
+        "php": ">=8.0",
+        "twig/twig": "^2.7 || ^3.4"
     },
     "require-dev": {
         "openeuropa/code-review": "^2.0",
-        "phpunit/phpunit": "^6.5 || ^7 || ^8.5.23 || ^9"
+        "phpunit/phpunit": "^8 || ^9"
     },
     "autoload": {
         "psr-4": {
@@ -28,10 +28,5 @@
     },
     "scripts": {
         "changelog": "docker run --rm -v \"$(pwd):$(pwd)\" -w $(pwd) muccg/github-changelog-generator openeuropa/ecl-twig-loader -t $CHANGELOG_GITHUB_TOKEN --future-release=$CHANGELOG_FUTURE_RELEASE --release-branch=3.x"
-    },
-    "extra": {
-        "_readme": [
-            "Explicit minimum version of phpunit/phpunit 8 to due to https://stackoverflow.com/a/70974793"
-        ]
     }
 }

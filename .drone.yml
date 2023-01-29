@@ -28,9 +28,7 @@ pipeline:
       - composer install --ansi --no-suggest --no-progress
     when:
       matrix:
-        include:
-          COMPOSER_BOUNDARY: highest
-          PHP_VERSION: [8.0, 8.1]
+        COMPOSER_BOUNDARY: highest
 
   composer-install-lowest:
     group: post-prepare
@@ -41,9 +39,7 @@ pipeline:
       - composer update --prefer-lowest --prefer-stable --ansi --no-suggest --no-progress
     when:
       matrix:
-        include:
-          COMPOSER_BOUNDARY: lowest
-          PHP_VERSION: 7.4
+        COMPOSER_BOUNDARY: lowest
 
   grumphp:
     group: test
@@ -59,7 +55,6 @@ pipeline:
 
 matrix:
   PHP_VERSION:
-    - 7.4
     - 8.0
     - 8.1
   COMPOSER_BOUNDARY:
