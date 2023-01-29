@@ -41,8 +41,9 @@ pipeline:
       - composer update --prefer-lowest --prefer-stable --ansi --no-suggest --no-progress
     when:
       matrix:
-        PHP_VERSION: 7.4
         COMPOSER_BOUNDARY: lowest
+        exclude:
+          PHP_VERSION: [8.0, 8.1]
 
   grumphp:
     group: test
