@@ -10,9 +10,8 @@
         "twig/twig": "^1.38 || ^2.7 || ^3.4.3"
     },
     "require-dev": {
-        "cweagans/composer-patches": "~1.6",
-        "openeuropa/code-review": "^1.6",
-        "phpunit/phpunit": "^6.5 || ^7 || ^8 || ^9"
+        "openeuropa/code-review": "^2.0.0-alpha6",
+        "phpunit/phpunit": "^9"
     },
     "autoload": {
         "psr-4": {
