@@ -7,7 +7,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.0",
-        "twig/twig": "^1.38 || ^2.7 || ^3.4.3"
+        "twig/twig": "^2.14.7 || ^3.4.3"
     },
     "require-dev": {
         "openeuropa/code-review": "^2.0.0-alpha6",
