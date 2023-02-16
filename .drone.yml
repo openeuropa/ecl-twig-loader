@@ -16,6 +16,7 @@ services:
   web:
     image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     environment:
+      - COMPOSERVER=--1
       - DOCUMENT_ROOT=/test/ecl-twig-loader
 
 pipeline:
