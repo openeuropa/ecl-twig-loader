@@ -16,7 +16,6 @@ services:
   web:
     image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     environment:
-      - COMPOSERVER=--2
       - DOCUMENT_ROOT=/test/ecl-twig-loader
 
 pipeline:
@@ -26,10 +25,7 @@ pipeline:
     volumes:
       - /cache:/cache
     commands:
-      - composer install --ansi --no-progress
-    when:
-      matrix:
-        COMPOSER_BOUNDARY: highest
+      - composer install --ansi --no-suggest --no-progress
 
   composer-update-lowest:
     group: post-prepare
@@ -37,7 +33,7 @@ pipeline:
     volumes:
       - /cache:/cache
     commands:
-      - composer update --prefer-lowest --ansi --no-progress
+      - composer update --prefer-lowest --ansi --no-suggest --no-progress
     when:
       matrix:
         COMPOSER_BOUNDARY: lowest
@@ -56,8 +52,8 @@ pipeline:
 
 matrix:
   PHP_VERSION:
-    - 8.0
-    - 8.1
+    - 7.2
+    - 7.3
   COMPOSER_BOUNDARY:
     - lowest
     - highest

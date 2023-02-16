@@ -6,12 +6,13 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.0",
-        "twig/twig": "^2.14.7 || ^3.4.3"
+        "php": ">=7.2",
+        "twig/twig": "^1.38 || ^2.7"
     },
     "require-dev": {
-        "openeuropa/code-review": "^2.0.0-alpha6",
-        "phpunit/phpunit": "^9"
+        "cweagans/composer-patches": "~1.6",
+        "openeuropa/code-review": "^1.6",
+        "phpunit/phpunit": "^6.5 || ^7 || ^8 || ^9"
     },
     "autoload": {
         "psr-4": {
@@ -24,11 +25,5 @@
     },
     "scripts": {
         "changelog": "docker run --rm -v \"$(pwd):$(pwd)\" -w $(pwd) muccg/github-changelog-generator openeuropa/ecl-twig-loader -t $CHANGELOG_GITHUB_TOKEN --future-release=$CHANGELOG_FUTURE_RELEASE --release-branch=3.x"
-    },
-    "config": {
-        "allow-plugins": {
-            "phpro/grumphp": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
     }
 }
