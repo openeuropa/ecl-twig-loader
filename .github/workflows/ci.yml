@@ -7,5 +7,5 @@ on:
       - 4.x
 
 jobs:
-  ci:
+  automated-test:
     uses: openeuropa/github-ci/.github/workflows/php-library-ci.yml@main
