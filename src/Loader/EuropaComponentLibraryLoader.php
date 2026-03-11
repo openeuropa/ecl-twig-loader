@@ -75,7 +75,7 @@ class EuropaComponentLibraryLoader extends FilesystemLoader
 
         // If namespace is not one of ours just move along, nothing to see here.
         if (!in_array($namespace, $this->namespaces)) {
-            return parent::findTemplate($name);
+            return parent::findTemplate($name, $throw);
         }
 
         // If component uses full name just use it, our job is done.
